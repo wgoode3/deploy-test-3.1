@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model Note
+
+<div class="row">
+
+    <div class="col">
+        <form action="/create" method="post">
+            <div class="form-group">
+                <label>Your Note:</label>
+                <textarea class="form-control" asp-for="Text"></textarea>
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <input type="submit" class="btn btn-outline-dark" value="Add Note" />
+        </form>
+    </div>
+
+    <div class="col">
+        <ul class="list-group">
+            <li class="list-group-item bg-dark text-white">Notes</li>
+            @foreach (var note in ViewBag.Notes)
+            {
+                <li class="list-group-item">
+                    @note.Text
+                    <a href="/delete/@note.NoteId" class="close">&times;</a>
+                </li>
+            }
+        </ul>
+    </div>
+    
+</div>
